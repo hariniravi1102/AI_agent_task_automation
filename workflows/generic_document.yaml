@@ -1,0 +1,31 @@
+workflow:
+  name: generic_document_workflow
+
+  trigger:
+    event_type: DOCUMENT_RECEIVED
+
+  steps:
+    - id: validate
+      agent: validation_agent
+      retry: 0
+      on_failure: STOP
+
+    - id: extract
+      agent: extraction_agent
+      retry: 1
+      on_failure: STOP
+
+    - id: process
+      agent: processing_agent
+      retry: 1
+      on_failure: STOP
+
+    - id: generate_output
+      agent: report_agent
+      retry: 0
+      on_failure: STOP
+
+    - id: notify
+      agent: notification_agent
+      retry: 0
+      on_failure: CONTINUE

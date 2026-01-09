@@ -1,0 +1,29 @@
+<h2>Job {{ job.id }}</h2>
+
+<p><b>Status:</b> {{ job.status }}</p>
+<p><b>Source:</b> {{ job.source }}</p>
+
+<h3>Steps</h3>
+<ul>
+{% for step in steps %}
+  <li>
+    {{ step.step_name }} → {{ step.status }}
+    (attempts: {{ step.attempts }})
+    {% if step.error %}
+       {{ step.error }}
+    {% endif %}
+  </li>
+{% endfor %}
+</ul>
+
+<h3>LLM Decisions</h3>
+<ul>
+{% for d in decisions %}
+  <li>
+    <b>{{ d.agent }}</b> ({{ d.step_name }})<br>
+    Decision: {{ d.decision }}<br>
+    Confidence: {{ d.confidence }}<br>
+    Reasoning: {{ d.reasoning }}
+  </li>
+{% endfor %}
+</ul>

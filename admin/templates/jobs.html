@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jobs</title>
+</head>
+<body>
+<h2>Jobs</h2>
+<p>
+  <a href="/admin/charts">View Job Statistics</a> |
+  <a href="/admin/llm">View LLM Decisions</a>
+</p>
+<table border="1" cellpadding="6">
+<tr>
+  <th>ID</th>
+  <th>Event</th>
+  <th>Source</th>
+  <th>Status</th>
+  <th>Created</th>
+</tr>
+
+{% for job in jobs %}
+<tr>
+  <td><a href="/admin/job/{{ job.id }}">{{ job.id }}</a></td>
+  <td>{{ job.event_type }}</td>
+  <td>{{ job.source }}</td>
+  <td>{{ job.status }}</td>
+  <td>{{ job.created_at }}</td>
+</tr>
+{% endfor %}
+
+</table>
+</body>
+</html>

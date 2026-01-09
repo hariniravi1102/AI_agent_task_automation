@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Statistics</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<h2>Jobs per Day</h2>
+
+<canvas id="jobsChart" width="800" height="400"></canvas>
+
+<br>
+<a href="/admin">⬅ Back to Dashboard</a>
+
+<script>
+async function loadChart() {
+    const response = await fetch("/admin/stats/jobs-per-day");
+    const data = await response.json();
+
+    const labels = data.map(d => d.day);
+    const counts = data.map(d => d.count);
+
+    const ctx = document.getElementById("jobsChart").getContext("2d");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "Jobs Executed",
+                data: counts,
+                backgroundColor: "rgba(54, 162, 235, 0.6)",
+                borderColor: "rgba(54, 162, 235, 1)",
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            animation: {
+                duration: 1200,
+                easing: "easeOutQuart"
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: "Number of Jobs"
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: "Date"
+                    }
+                }
+            }
+        }
+    });
+}
+
+loadChart();
+</script>
+
+</body>
+</html>

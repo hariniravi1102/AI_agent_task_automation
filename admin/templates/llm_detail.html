@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="llm-wrapper">
+
+  <h2>LLM Decision</h2>
+
+  <div class="meta">
+    <div><b>Agent:</b> {{ d.agent }}</div>
+    <div><b>Trigger:</b> {{ d.trigger_type or "unknown" }}</div>
+    <div><b>Time:</b> {{ d.created_at }}</div>
+  </div>
+
+  <h3>Decision</h3>
+  <p>
+    <b>{{ d.decision }}</b> —
+    Confidence:
+    {% if d.confidence is not none %}
+      {{ "%.2f"|format(d.confidence) }}
+    {% else %}
+      —
+    {% endif %}
+  </p>
+
+  <h3>Reasoning</h3>
+  <pre class="block">{{ d.reasoning or "No reasoning provided" }}</pre>
+
+  {% if d.suggestion %}
+    <h3>Suggestion</h3>
+    <pre class="block">{{ d.suggestion }}</pre>
+  {% endif %}
+
+  {% if d.input_context %}
+    <h3>Input Context</h3>
+    <pre class="block">{{ d.input_context }}</pre>
+  {% endif %}
+
+  <a class="back" href="/admin/llm">← Back to decisions</a>
+
+</div>
+
+{% endblock %}

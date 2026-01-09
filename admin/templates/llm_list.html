@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="header">
+  <h1>LLM Decision Explorer</h1>
+</div>
+
+<div class="card">
+  <table class="table">
+    <tr>
+      <th>Agent</th>
+      <th>Trigger</th>
+      <th>Decision</th>
+      <th>Confidence</th>
+      <th></th>
+    </tr>
+
+    {% for d in decisions %}
+    <tr>
+      <td>{{ d.agent }}</td>
+
+      <td>
+            <div><b>Event:</b> {{ d.trigger_type }}</div>
+            <div><b>Source:</b> {{ d.source }}</div>
+      </td>
+
+      <td>{{ d.decision }}</td>
+
+      <td class="
+        {% if d.confidence >= 0.85 %}conf-high
+        {% elif d.confidence >= 0.65 %}conf-mid
+        {% else %}conf-low{% endif %}
+      ">
+        {{ "%.2f"|format(d.confidence or 0) }}
+      </td>
+
+      <td>
+        <a href="/admin/llm/{{ d.id }}">View →</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+{% endblock %}
