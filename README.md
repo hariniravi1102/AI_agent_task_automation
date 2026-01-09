@@ -1,4 +1,4 @@
-# LLM Agent Platform (Event-Driven & Explainable)
+# LLM Agent Platform
 
 An **event-driven AI agent system** that uses **LLMs for reasoning and decision-making**, with full **auditability, confidence scoring, and an LLM Decision Explorer UI**.
 
