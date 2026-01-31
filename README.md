@@ -2,6 +2,8 @@
 
 An **event-driven AI agent system** that uses **LLMs for reasoning and decision-making**, with full **auditability, confidence scoring, and an LLM Decision Explorer UI**.
 
+Designed event-driven AI validation pipelines triggered by file uploads and email ingestion, using LLMs and embedding-based semantic analysis to detect anomalies, inconsistencies, and schema drift—replacing brittle rule-based QA systems.
+
 This project demonstrates how **LLMs operate as agents inside real workflows**, not just chat interfaces.
 
 ---
